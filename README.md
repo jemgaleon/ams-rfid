@@ -15,7 +15,7 @@ Scans RFID cards, posts each scan to the attendance API, and shows the result on
     | Wi-Fi connected (3 s) | WiFi Connected | IP: 192.168.x.x | |
     | Wi-Fi failed (3 s) | WiFi Error | Retrying... | |
     | Idle | Card ID: - | Tap Card... | |
-    | Sending | Card ID: xxx | Please wait... | |
+    | Sending | Card ID: xxx | Please wait... (animated) | |
     | Result (3 s) | Card ID: xxx | student name | message |
     | Server unreachable (3 s) | Card ID: xxx | Unable to connect server | WiFi disconnected / HTTP failed / POST failed / Server error NNN |
 *   **LED / Buzzer Feedback:**

@@ -47,6 +47,42 @@ static void showResultScreen(const String& cardUid, const connection::ScanResult
   display::show(cardLine(cardUid), result.name, result.message);
 }
 
+// ---------------------------------------------------------------- "Please wait..." animation
+
+// The scan POST blocks the loop, so a separate task animates the dots meanwhile. Only that task
+// draws while it runs; stopWaitingAnimation() waits for it to exit before anything else draws.
+static String waitingCardUid;
+static volatile bool waitingAnimating = false;
+static volatile TaskHandle_t waitingTask = nullptr;
+
+static void animateWaiting(void*) {
+  uint8_t frame = 0;
+  while (waitingAnimating) {
+    display::show(cardLine(waitingCardUid), "Please wait" + dots(frame++ % 4));
+    vTaskDelay(pdMS_TO_TICKS(300));
+  }
+  waitingTask = nullptr;
+  vTaskDelete(nullptr);
+}
+
+static void startWaitingAnimation(const String& cardUid) {
+  waitingCardUid = cardUid;
+  waitingAnimating = true;
+  TaskHandle_t handle = nullptr;
+  if (xTaskCreatePinnedToCore(animateWaiting, "waitAnim", 4096, nullptr, 1, &handle,
+                              ARDUINO_RUNNING_CORE) != pdPASS) {
+    waitingAnimating = false;
+    display::show(cardLine(cardUid), "Please wait...");  // no task: a static screen instead
+    return;
+  }
+  waitingTask = handle;
+}
+
+static void stopWaitingAnimation() {
+  waitingAnimating = false;
+  while (waitingTask != nullptr) delay(5);
+}
+
 // Holds the current screen until `ms` have passed since `sinceMs`.
 static void holdUntil(uint32_t sinceMs, uint32_t ms) {
   const uint32_t elapsed = millis() - sinceMs;
@@ -157,8 +193,9 @@ static void handleScan(const String& cardUid) {
   Serial.println("---- CARD SCAN ----");
   Serial.printf("cardUid: %s\nscanId: %s\n", cardUid.c_str(), scanId.c_str());
 
-  display::show(cardLine(cardUid), "Please wait...");
+  startWaitingAnimation(cardUid);
   const connection::ScanResult result = connection::postScan(scanId, cardUid);
+  stopWaitingAnimation();
 
   logResult(result);
   showResultScreen(cardUid, result);
