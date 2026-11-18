@@ -1,0 +1,74 @@
+[
+  {
+    "componentId": "esp32-devkit-v1",
+    "name": "ESP32 DevKit V1",
+    "quantity": 1,
+    "specs": "ESP32-WROOM-32 module, 2.4GHz Wi-Fi & Bluetooth"
+  },
+  {
+    "componentId": "rfid-rc522",
+    "name": "MFRC522 RFID Reader",
+    "quantity": 1,
+    "specs": "13.56 MHz RFID Reader/Writer, SPI Interface"
+  },
+  {
+    "componentId": "oled-128x64",
+    "name": "SSD1306 OLED Display",
+    "quantity": 1,
+    "specs": "128x64 pixels, I2C interface, 0.96 inch"
+  },
+  {
+    "componentId": "breadboard-full",
+    "name": "Breadboard",
+    "quantity": 1,
+    "specs": "Full-size solderless breadboard"
+  },
+  {
+    "componentId": "led-red-5mm",
+    "name": "Red LED",
+    "quantity": 1,
+    "specs": "5mm, ~2.0V forward voltage — idle / denied indicator (IO25)"
+  },
+  {
+    "componentId": "led-green-5mm",
+    "name": "Green LED",
+    "quantity": 1,
+    "specs": "5mm, ~2.2V forward voltage — valid scan indicator (IO26)"
+  },
+  {
+    "componentId": "resistor-220",
+    "name": "Resistor 220Ω",
+    "quantity": 2,
+    "specs": "1/4W, current limiting for each LED (~5mA at 3.3V)"
+  },
+  {
+    "componentId": "buzzer-active-5v",
+    "name": "Active Buzzer",
+    "quantity": 1,
+    "specs": "5V active (self-oscillating) buzzer, ~30mA — beeps on every scan"
+  },
+  {
+    "componentId": "npn-s8050",
+    "name": "NPN Transistor",
+    "quantity": 1,
+    "specs": "S8050 or 2N2222, low-side switch for the buzzer (IO27)"
+  },
+  {
+    "componentId": "resistor-1k",
+    "name": "Resistor 1kΩ",
+    "quantity": 1,
+    "specs": "1/4W, transistor base resistor"
+  },
+  {
+    "componentId": "diode-1n4148",
+    "name": "Diode 1N4148",
+    "quantity": 1,
+    "specs": "Flyback diode across the buzzer"
+  },
+  {
+    "componentId": "wire-single",
+    "name": "Jumper Wires",
+    "quantity": 22,
+    "specs": "Male-to-male, assorted colors"
+  }
+]
